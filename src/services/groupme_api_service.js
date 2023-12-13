@@ -1,4 +1,5 @@
 const axios = require('axios');
+
 const headers = {
     headers: {
         'X-Access-Token': process.env.GROUPME_API_KEY
@@ -14,4 +15,4 @@ async function sendMessage(text, user) {
     }
 }
 
-module.exports.sendMessage = sendMessage
+module.exports = {sendMessage}

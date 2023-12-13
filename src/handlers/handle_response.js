@@ -1,8 +1,7 @@
-const { triggerAsyncId } = require('async_hooks');
 const openAiService = require('../services/openapi_service');
 const groupmeApiService = require('../services/groupme_api_service')
 
-async function handleResponse(message, user) {
+const handleResponse = async function (message, user) {
     console.log(`Recieved message: ${message} from user ${user}`)
 
     if(checkForDeletedMessage) {
@@ -29,4 +28,4 @@ function checkForDeletedMessage(message) {
     return message === 'A message was deleted.';
 }
 
-module.exports.handleResponse = handleResponse
+module.exports = {handleResponse};
