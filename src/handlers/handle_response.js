@@ -16,7 +16,7 @@ const handleResponse = async function (message, user) {
             console.log(`response: ${JSON.stringify(response)}`);
             let messageArr = [];
             let aiMessage = response.choices[0].message.content;
-            if (aiMessage.length >= 900) {
+            if (aiMessage.length >= 400) {
                 messageArr = breakupString(aiMessage);
                 messageArr.forEach(message => {
                     groupmeApiService.sendMessage(message, user);
@@ -42,7 +42,7 @@ function breakupString(str) {
 
     letters.forEach(letter => {
         tempStr = tempStr+letter;
-        if(counter === 500) {
+        if(counter === 200) {
             arr.push(tempStr);
             counter = 0;
         }
