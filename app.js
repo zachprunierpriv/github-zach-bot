@@ -13,7 +13,7 @@ app.listen(port, () => {
 });
 
 app.post('/api/message', (req, res) => {
-    console.log(req);
+    console.log(req.body);
     if(req.body.text == 'caw caw') {
         axios.post('https://api.groupme.com/v3/bots/post', {"text" : "CAW", "bot_id" : "04f99dc63c3726526ed27a1d9e"});
     }
