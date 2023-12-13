@@ -19,7 +19,7 @@ const handleResponse = async function (message, user) {
             if (aiMessage.length >= 900) {
                 messageArr = breakupString(aiMessage);
                 messageArr.forEach(message => {
-                    groupmeApiService(message, user);
+                    groupmeApiService.sendMessage(message, user);
                 })
                 return true;
             } else {
