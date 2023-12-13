@@ -14,42 +14,13 @@ const handleResponse = async function (message, user) {
         
         if(response) {
             console.log(`response: ${JSON.stringify(response)}`);
-            let messageArr = [];
-            let aiMessage = response.choices[0].message.content;
-            if (aiMessage.length >= 400) {
-                messageArr = breakupString(aiMessage);
-                messageArr.forEach(message => {
-                    groupmeApiService.sendMessage(message, user);
-                })
-                return true;
-            } else {
-                groupmeApiService.sendMessage(aiMessage, user);
-
-            }
+            groupmeApiService.sendMessage(response.choices[0].message.content, user);
         }
 
         return true;
     }
 
     return null;
-}
-
-function breakupString(str) {
-    let arr = [];
-    let tempStr = '';
-    let counter = 0
-    let letters = str.split('');
-
-    letters.forEach(letter => {
-        tempStr = tempStr+letter;
-        if(counter === 200) {
-            arr.push(tempStr);
-            counter = 0;
-        }
-        counter++;
-    });
-    arr.push(str.substr(counter))
-    return arr;
 }
 
 function checkForDeletedMessage(message) {
