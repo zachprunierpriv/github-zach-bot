@@ -48,7 +48,7 @@ function breakupString(str) {
         }
         counter++;
     });
-
+    arr.push(str.substr(counter))
     return arr;
 }
 
