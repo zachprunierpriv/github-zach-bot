@@ -16,7 +16,7 @@ app.listen(port, () => {
 app.post('/api/message', async (req, res) => {
     console.log(req.body);
     try {
-        response = await responseHandler(req.body.text, req.body.name);
+        response = await responseHandler.handleResponse(req.body.text, req.body.name);
         res.sendStatus(200);
     } catch (e) {
         console.log(`Error handling message from groupme ${e.message}`);
