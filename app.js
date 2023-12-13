@@ -21,7 +21,7 @@ app.listen(port, () => {
 app.post('/api/message', (req, res) => {
     console.log(req.body);
     try {
-        if(req.body.text.toLowerCase() === 'caw caw') {
+        if(req.body.text.toLowerCase().trim() === 'caw caw') {
             console.log('making post request to groupme');
             axios.post('https://api.groupme.com/v3/bots/post', {"text" : "CAW", "bot_id" : "04f99dc63c3726526ed27a1d9e"}, headers);
         }
