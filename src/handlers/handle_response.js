@@ -14,7 +14,7 @@ const handleResponse = async function (message, user) {
         
         if(response) {
             console.log(`response: ${JSON.stringify(response)}`);
-            groupmeApiService.sendMessage(response.data.choices[0].text, user);
+            groupmeApiService.sendMessage(response.choices[0].message.content, user);
         }
 
         return true;
