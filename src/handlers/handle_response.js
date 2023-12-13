@@ -13,7 +13,7 @@ const handleResponse = async function (message, user) {
         let response = await openAiService.generateAiResponse(string);
         
         if(response) {
-            console.log(`response: ${response}`);
+            console.log(`response: ${JSON.stringify(response)}`);
             groupmeApiService.sendMessage(response.data.choices[0].text, user);
         }
 
