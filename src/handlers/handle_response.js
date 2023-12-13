@@ -14,13 +14,42 @@ const handleResponse = async function (message, user) {
         
         if(response) {
             console.log(`response: ${JSON.stringify(response)}`);
-            groupmeApiService.sendMessage(response.choices[0].message.content, user);
+            let messageArr = [];
+            let aiMessage = response.choices[0].message.content;
+            if (aiMessage.length >= 900) {
+                messageArr = breakupString(aiMessage);
+                messageArr.forEach(message => {
+                    groupmeApiService(message, user);
+                })
+                return true;
+            } else {
+                groupmeApiService.sendMessage(aiMessage, user);
+
+            }
         }
 
         return true;
     }
 
     return null;
+}
+
+function breakupString(str) {
+    let arr = [];
+    let tempStr = '';
+    let counter = 0
+    let letters = str.split('');
+
+    letters.forEach(letter => {
+        tempStr = tempStr+letter;
+        if(counter === 500) {
+            arr.push(tempStr);
+            counter = 0;
+        }
+        counter++;
+    });
+
+    return arr;
 }
 
 function checkForDeletedMessage(message) {
