@@ -29,4 +29,4 @@ function checkForDeletedMessage(message) {
     return message === 'A message was deleted.';
 }
 
-module.exports = handleResponse;
+module.exports = {handleResponse: handleResponse};
