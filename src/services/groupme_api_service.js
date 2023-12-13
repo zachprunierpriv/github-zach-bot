@@ -5,7 +5,7 @@ const headers = {
     }
 }
 
-async function sendMessage(text, user) {
+export async function sendMessage(text, user) {
     try {
         axios.post('https://api.groupme.com/v3/bots/post', {"text" : `@${user} ${text}`, "bot_id" : "04f99dc63c3726526ed27a1d9e"}, headers);
         return true;
@@ -13,5 +13,3 @@ async function sendMessage(text, user) {
         console.log(`Error making request to groupme ${e.message}`);
     }
 }
-
-module.exports = {sendMessage: sendMessage}
