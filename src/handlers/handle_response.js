@@ -4,10 +4,9 @@ const groupmeApiService = require('../services/groupme_api_service')
 const handleResponse = async function (message, user) {
     console.log(`Recieved message: ${message} from user ${user}`)
 
-    if(checkForDeletedMessage) {
+    if(checkForDeletedMessage(message)) {
         return null;
     }
-
     if(message.toLowerCase().includes('hey crow daddy, ')) {
         console.log(`Request to Crow Daddy made, calling openAI`);
         let string = message.toLowerCase().replace('hey crow daddy, ', '');
