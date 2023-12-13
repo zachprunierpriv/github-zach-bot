@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 const headers = {
     headers: {
-        'X-Access-Token': process.env.GROUPME_API_TOKEN
+        'X-Access-Token': process.env.GROUPME_API_KEY
     }
 }
 
