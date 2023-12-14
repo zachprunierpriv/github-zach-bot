@@ -40,6 +40,8 @@ async function generateResponse(message) {
     
     object.messages[0].content = object.messages[0].content + message + ' \\n"""';
 
+    console.log(`Sending prompt to Open Ai: ${object.messages[0].content}`);
+
     return await client.chat.completions.create(object);
 }
 
