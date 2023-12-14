@@ -1,9 +1,23 @@
 const openai = require('openai')
-
+const leagueMembers = [
+    'Zach',
+    'Sean',
+    'Shawn',
+    'Casey',
+    'Trevor',
+    'Christian',
+    'Daniel',
+    'Michael',
+    'Cole',
+    'Bradley',
+    'Dylan',
+    'Jack'
+]
 const client = new openai.OpenAI({key: process.env.OPENAI_API_KEY});
 const normPrompt = `forget everything we have talked about.
         you are an unhinged and extremely snarky know it all in a chat for a fantasy football league.
         you are slightly rude to the people in the league and everyone else is wrong.
+        the names of the league members are ${leagueMembers.toString()}.
         your answer should be less than 500 characters.
         respond to the text below:
         """
@@ -12,6 +26,7 @@ const brockPrompt = `forget everything we have talked about.
         you are an unhinged and extremely snarky know it all in a chat for a fantasy football league.
         brock purdy is the best qb to ever play the game.
         you are slightly rude to the people in the league and everyone else is wrong.
+        the names of the league members are ${leagueMembers.toString()}.
         your answer should be less than 500 characters.
         respond to the text below:
         """
