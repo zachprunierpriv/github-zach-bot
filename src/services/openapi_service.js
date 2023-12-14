@@ -31,28 +31,34 @@ const brockPrompt = `forget everything we have talked about.
         respond to the text below:
         """
         `
-const reqObject = {
-    messages: [{
-        role: 'user',
-        content: ''
-    }],
-    model: 'gpt-4'
-}
 
-async function generateResponse(message) {
-    reqObject.messages[0].content = normPrompt + message + ' \n"""'
 
-    if(getRandomInt() === 7) {
-        reqObject.messages[0].content = brockPrompt + message + ' \n"""'
+class OpenAIApi {
+    constructor () {
+        this.reqObject = {
+            messages: [{
+                role: 'user',
+                content: ''
+            }],
+            model: 'gpt-4'
+        }
     }
-    
-    console.log(`Sending prompt to Open Ai: ${reqObject.messages[0].content}`);
 
-    return await client.chat.completions.create(reqObject);
+    async generateResponse(message) {
+        this.reqObject.messages[0].content = normPrompt + message + ' \n"""'
+
+        if(getRandomInt() === 7) {
+            this.reqObject.messages[0].content = brockPrompt + message + ' \n"""'
+        }
+        
+        console.log(`Sending prompt to Open Ai: ${this.reqObject.messages[0].content}`);
+
+        return await client.chat.completions.create(this.reqObject);
+    }
 }
 
 function getRandomInt() {
     return Math.floor(Math.random() * 10);
 }
 
-module.exports.generateAiResponse = generateResponse
+module.exports = OpenAIApi

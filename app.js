@@ -1,7 +1,6 @@
-#!/usr/bin/node
 require('dotenv').config();
 const express = require('express');
-const responseHandler = require('./src/handlers/handle_response')
+const ResponseHandler = require('./src/handlers/handle_response')
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -13,10 +12,9 @@ app.listen(port, () => {
 });
 
 app.post('/api/message', async (req, res) => {
-    console.log(req.body);
     try {
-        console.log(responseHandler);
-        response = await responseHandler.handleResponse(req.body.text, req.body.name);
+        let handler = new ResponseHandler();
+        response = await handler.handleResponse(req.body.text, req.body.name);
         res.sendStatus(200);
     } catch (e) {
         console.log(`Error handling message from groupme ${e.message}`);
@@ -27,5 +25,3 @@ app.post('/api/message', async (req, res) => {
 app.get('/api/healthcheck', (req, res) => {
     res.send('OK!');
 })
-
-
