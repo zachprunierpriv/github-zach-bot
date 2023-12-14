@@ -31,9 +31,9 @@ async function generateResponse(message) {
         reqObject.messages[0].content = brockPrompt + message + ' \n"""'
     }
     
-    console.log(`Sending prompt to Open Ai: ${object.messages[0].content}`);
+    console.log(`Sending prompt to Open Ai: ${reqObject.messages[0].content}`);
 
-    return await client.chat.completions.create(object);
+    return await client.chat.completions.create(reqObject);
 }
 
 function getRandomInt() {
