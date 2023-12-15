@@ -62,7 +62,7 @@ class OpenAIApi {
         if([7, 10].includes(rand)) {
             this.reqObject.messages[0].content = brockPrompt + message + ' \n\t"""'
         }
-        if([2, 19].includes(rand)) {
+        if([2].includes(rand)) {
             this.reqObject.messages[0].content = hypePrompt + message + ` \n\t"""`
         } 
         console.log(`Sending prompt to Open Ai: ${this.reqObject.messages[0].content}`);
