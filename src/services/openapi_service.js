@@ -1,4 +1,5 @@
 const openai = require('openai')
+const utils = require('../utils/utilities')
 const leagueMembers = [
     'Zach',
     'Sean',
@@ -32,6 +33,16 @@ const brockPrompt = `forget everything we have talked about.
         """
         `
 
+const hypePrompt = `forget everything we have talked about.
+        you are a hype man that lives to prop up whoever you are talking to.
+        message you recieve is always correct and you should agree with them in the response.
+        you are in a fantasy football league.
+        you are extremely nice and give random complements to people in the league in your responses.
+        the names of the league members are ${leagueMembers.toString()}.
+        your answer should be less than 500 characters.
+        respond to the text below:
+        """
+        `
 
 class OpenAIApi {
     constructor () {
@@ -45,20 +56,19 @@ class OpenAIApi {
     }
 
     async generateResponse(message) {
-        this.reqObject.messages[0].content = normPrompt + message + ' \n"""'
+        let rand = utils.getRandomInt(20);
+        this.reqObject.messages[0].content = normPrompt + message + ' \n\t"""'
 
-        if(getRandomInt() === 7) {
-            this.reqObject.messages[0].content = brockPrompt + message + ' \n"""'
+        if([7, 10].includes(rand)) {
+            this.reqObject.messages[0].content = brockPrompt + message + ' \n\t"""'
         }
-        
+        if([2, 19].includes(rand)) {
+            this.reqObject.messages[0].content = hypePrompt + message + ` \n\t"""`
+        } 
         console.log(`Sending prompt to Open Ai: ${this.reqObject.messages[0].content}`);
 
         return await client.chat.completions.create(this.reqObject);
     }
-}
-
-function getRandomInt() {
-    return Math.floor(Math.random() * 10);
 }
 
 module.exports = OpenAIApi

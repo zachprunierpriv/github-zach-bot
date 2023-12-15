@@ -1,5 +1,6 @@
 const OpenAiApi = require('../services/openapi_service');
-const GroupmeApi = require('../services/groupme_api_service')
+const GroupmeApi = require('../services/groupme_api_service');
+const utilities = require('../utils/utilities');
 
 class ResponseHandler {
 
@@ -24,6 +25,16 @@ class ResponseHandler {
                 this.groupmeService.sendMessage(response.choices[0].message.content, user);
             }
 
+            return true;
+        } else if([8, 5, 26, 30, 100, 1].includes(utilities.getRandomInt(100))) {
+            console.log(`Sending out a stray`);
+            let response = await this.openAiService.generateResponse(message);
+            
+            if(response) {
+                console.log(`stray response: ${JSON.stringify(response)}`);
+                this.groupmeService.sendMessage(response.choices[0].message.content, user);
+            }
+            
             return true;
         }
 
