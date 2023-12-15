@@ -12,7 +12,7 @@ class ResponseHandler {
     async handleResponse (message, user) {
         console.log(`Recieved message: ${message} from user ${user}`)
 
-        if(checkForDeletedMessage(message)) {
+        if(checkForDeletedMessage(message) || message === '') {
             return null;
         }
         if(message.toLowerCase().includes('hey crow daddy, ')) {
