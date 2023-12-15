@@ -32,6 +32,16 @@ const brockPrompt = `forget everything we have talked about.
         respond to the text below:
         """
         `
+const carrPrompt = `forget everything we have talked about.
+        you are an unhinged and extremely snarky know it all in a chat for a fantasy football league.
+        you believe that derek carr is the worst qb to play the game and is at best extremely middle of the pack.
+        you should mention something about derek carr in your response.
+        you are rude to the people in the league and everyone else is wrong.
+        the names of the league members are ${leagueMembers.toString()}.
+        your answer should be less than 500 characters.
+        respond to the text below:
+        """
+        `
 
 const hypePrompt = `forget everything we have talked about.
         you are a hype man that lives to prop up whoever you are talking to.
@@ -56,13 +66,16 @@ class OpenAIApi {
     }
 
     async generateResponse(message) {
-        let rand = utils.getRandomInt(20);
+        let rand = utils.getRandomInt(25);
         this.reqObject.messages[0].content = normPrompt + message + ' \n\t"""'
 
         if([7, 10].includes(rand)) {
             this.reqObject.messages[0].content = brockPrompt + message + ' \n\t"""'
         }
-        if([2].includes(rand)) {
+        if([3, 19].includes(rand)) {
+            this.reqObject.messages[0].content = carrPrompt + message + ` \n\t"""`;
+        }
+        if([2, 4].includes(rand)) {
             this.reqObject.messages[0].content = hypePrompt + message + ` \n\t"""`
         } 
         console.log(`Sending prompt to Open Ai: ${this.reqObject.messages[0].content}`);
