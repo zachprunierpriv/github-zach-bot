@@ -14,6 +14,7 @@ const leagueMembers = [
     'Dylan',
     'Jack'
 ]
+
 const client = new openai.OpenAI({key: process.env.OPENAI_API_KEY});
 const normPrompt = `forget everything we have talked about.
         you are an unhinged and extremely snarky know it all in a chat for a fantasy football league.
@@ -56,6 +57,11 @@ const hypePrompt = `forget everything we have talked about.
         """
         `
 
+const shaqaroni = `give me a plug for the Shaq-a-Roni pizza, created to feed big appetites and make a big impact.
+                the pieces are Shaq sized and have over 60 pepperoni from edge to edge. the slogan "pizza gets bigger when you Shaq-a-Roni"
+                should be used somewhere in the plug. you should also mention some of shaq's stats. the plug should be less than 500 characters.
+                it should be in the style of a corny overhyped tv commercial script. you should be really excited about the Shaq-a-Roni. Please don't use emojis`
+
 class OpenAIApi {
     constructor () {
         this.reqObject = {
@@ -81,6 +87,14 @@ class OpenAIApi {
             this.reqObject.messages[0].content = hypePrompt + message + ` \n\t"""`
         } 
         console.log(`Sending prompt to Open Ai: ${this.reqObject.messages[0].content}`);
+
+        return await client.chat.completions.create(this.reqObject);
+    }
+
+    async shaqPlug() {
+        this.reqObject.messages[0].content = shaqaroni;
+
+        console.log(`Sending shaqaroni prompt to Open AI:`);
 
         return await client.chat.completions.create(this.reqObject);
     }

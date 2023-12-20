@@ -15,6 +15,7 @@ class ResponseHandler {
         if(checkForDeletedMessage(message) || message === '') {
             return null;
         }
+        let rand = utilities.getRandomInt(200);
         if(message.toLowerCase().includes('hey crow daddy, ')) {
             console.log(`Request to Crow Daddy made, calling openAI`);
             let string = message.toLowerCase().replace('hey crow daddy, ', '');
@@ -26,7 +27,7 @@ class ResponseHandler {
             }
 
             return true;
-        } else if([73, 120, 26, 30, 100, 1].includes(utilities.getRandomInt(200))) {
+        } else if([73, 120, 26, 30, 100, 1].includes(rand)) {
             console.log(`Sending out a stray`);
             let response = await this.openAiService.generateResponse(message);
             
@@ -36,6 +37,14 @@ class ResponseHandler {
             }
             
             return true;
+        } else if([75, 46, 101, 119, 4, 15, 32, 78, 15, 38].includes(rand)) {
+            console.log('SHAQARONI!!!!!');
+            let response = await this.openAiService.shaqPlug();
+
+            if(response) {
+                console.log(`Shaqaroni response: ${JSON.stringify(response)}`);
+                this.groupmeService.sendMessage(response.choices[0].message.content, user);
+            }
         }
 
         return null;
