@@ -27,7 +27,7 @@ class ResponseHandler {
             }
 
             return true;
-        } else if([73, 120, 250, 200, 1].includes(rand)) {
+        } else if([73, 120, 250].includes(rand)) {
             console.log(`Sending out a stray`);
             let response = await this.openAiService.generateResponse(message);
             
