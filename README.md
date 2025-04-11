@@ -1,9 +1,23 @@
-# github-zach-bot
-The Crow Father is an AI powered bot for responding to my fantasy football chat
+# github-zach-bot: The Crow Father
 
-#TODO
-Integrate the Sleeper API for up to date teamnames, rosters, and user names
-Add support for ChatGPT conversations
+The Crow Father is an AI-powered chatbot designed to respond intelligently (and sometimes sarcastically) to messages in your fantasy football chat. It’s built to integrate with real-time data from the Sleeper API and eventually leverage ChatGPT for contextual banter, trash talk, or useful roster insights.
 
-#How to run
-npm i && npm run start
+---
+
+## TODO
+
+- [ ] Integrate the [Sleeper API](https://docs.sleeper.app/) to fetch:
+  - Team names
+  - Rosters
+  - Usernames
+  - Matchups
+- [ ] Add support for ChatGPT-style conversations (via OpenAI API)
+- [ ] Auto-roast last place team (optional, but highly encouraged)
+
+---
+
+## How to Run
+
+```bash
+npm install
+npm run start
